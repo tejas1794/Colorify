@@ -1,0 +1,58 @@
+<!doctype html>
+<title>Colorify</title>
+<style>
+	.column {
+	  float: left;
+	  width: 50%;
+	}
+
+	/* Clear floats after the columns */
+	.row:after {
+	  content: "";
+	  display: table;
+	  clear: both;
+	}
+</style>
+<h1>Welcome to Colorify! We take an uncolored image and fill it with colorful memories for you!</h1>
+
+<h2>Select a file to upload</h2>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+{% if filename %}
+	<div class="row">
+	 	<div>
+			<h3> Original Image </h3>
+		</div>
+		<div>
+		  <img style="max-width:800px;" src="{{ 'static/' + filename }}">
+		</div>
+	</div>
+	<div class="row">
+	 	<div>
+		  <h3> Colored Image </h3>
+		</div>
+		<div>
+		  <img style="max-width:800px;" src="{{ 'static/' + prediction }}">
+		</div>
+	</div>
+
+{% endif %}
+<form method="post" action="/" enctype="multipart/form-data">
+    <dl>
+		<p>
+			<input type="file" name="file" autocomplete="off" required>
+		</p>
+    </dl>
+    <p>
+		<input type="submit" value="Submit">
+	</p>
+</form>

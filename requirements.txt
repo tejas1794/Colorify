@@ -1,0 +1,9 @@
+torch
+scikit-image
+numpy
+matplotlib
+argparse
+Pillow
+ipython
+Flask == 1.1.2
+Werkzeug == 1.0.1
