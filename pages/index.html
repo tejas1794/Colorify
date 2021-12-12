@@ -1,58 +1,98 @@
 <!doctype html>
-<title>Colorify</title>
+<html>
+<head>
+    <title>Colorify</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
 <style>
-	.column {
-	  float: left;
-	  width: 50%;
-	}
+    .gradient {
+        background: red;
+        background: linear-gradient(90deg, rgba(255, 0, 0, 1) 0%, rgba(255, 145, 0, 1) 5%, rgba(255, 235, 59, 1) 10%, rgba(59, 255, 69, 1) 15%, rgba(59, 137, 255, 1) 20%, rgba(238, 130, 130, 1) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-	/* Clear floats after the columns */
-	.row:after {
-	  content: "";
-	  display: table;
-	  clear: both;
-	}
 </style>
-<h1>Welcome to Colorify! We take an uncolored image and fill it with colorful memories for you!</h1>
+<div class="container-fluid p-4">
+    <div class="card">
+        <div class="card-body">
+            <div>
+                <p class="gradient" style="font-size:60px;">Colorify!</p>
+            </div>
+            <h4 class="card-subtitle mb-2 text-muted">We take an uncolored image and fill it with colorful memories for
+                you!</h4>
 
-<h2>Select a file to upload</h2>
-<p>
-	{% with messages = get_flashed_messages() %}
-	  {% if messages %}
-		<ul>
-		{% for message in messages %}
-		  <li>{{ message }}</li>
-		{% endfor %}
-		</ul>
-	  {% endif %}
-	{% endwith %}
-</p>
-{% if filename %}
-	<div class="row">
-	 	<div>
-			<h3> Original Image </h3>
-		</div>
-		<div>
-		  <img style="max-width:800px;" src="{{ 'static/' + filename }}">
-		</div>
-	</div>
-	<div class="row">
-	 	<div>
-		  <h3> Colored Image </h3>
-		</div>
-		<div>
-		  <img style="max-width:800px;" src="{{ 'static/' + prediction }}">
-		</div>
-	</div>
+            <p class="card-text">This website was created as the final project for the class CP8318 - Machine Learning
+                by students: Raiyan Rahman and Tejas Vyas.
+                This app utilizes a pre-trained machine learning model described in the paper: <a
+                        href="https://arxiv.org/abs/1603.08511"> Colorful Image Colorization</a>.</p>
 
-{% endif %}
-<form method="post" action="/" enctype="multipart/form-data">
-    <dl>
-		<p>
-			<input type="file" name="file" autocomplete="off" required>
-		</p>
-    </dl>
-    <p>
-		<input type="submit" value="Submit">
-	</p>
-</form>
+            <p class="card-text"> More Details about the model are available on author's <a
+                    href="https://richzhang.github.io/colorization/"> website</a>.</p>
+
+            <p class="card-text text-secondary">Let's give it a try! Select an image to upload</p>
+            <p class="card-text">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            </p>
+
+
+            {% if filename %}
+            <div class="container-fluid m-4">
+                <div class="row">
+                    <div class="col">
+                        <div>
+                            <h3> Original Image </h3>
+                        </div>
+                        <div>
+                            <img style="max-width:666px; max-height:666px;" src="{{ 'static/' + filename }}">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <h3 class="gradient"> Colored Image </h3>
+                        </div>
+                        <div>
+                            <img style="max-width:666px;  max-height:666px;" src="{{ 'static/' + prediction }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <div class="d-flex justify-content-center">
+                <form method="post" action="/" enctype="multipart/form-data">
+                    <dl>
+                        <p>
+                            <input type="file" name="file" autocomplete="off" required>
+                        </p>
+                    </dl>
+                    <p>
+                        <input type="submit" type="button" class="btn btn-primary btn-lg btn-block" value="Colorize">
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
